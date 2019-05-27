@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class="container" id="content"></div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <script>
+            var orders = [
+            {
+                "orderId": "4561",
+                "userName": "Mark",
+                "orderDate": "Oct 22, 2014",
+                "amount": "50",
+                "status": "paid",
+                "statusBadge": "badge-success",
+                "trackingNumber": "343456676"
+            },
+            {
+                "orderId": "4567",
+                "userName": "Charles",
+                "orderDate": "Nov 12, 2012",
+                "amount": "10",
+                "status": "shipped",
+                "statusBadge": "badge-primary",
+                "trackingNumber": ""
+            },
+            {
+                "orderId": "6789",
+                "userName": "Juliana",
+                "orderDate": "June 30, 2018",
+                "amount": "170",
+                "status": "refunded",
+                "statusBadge": "badge-danger",
+                "trackingNumber": "234567781"
+            },
+            {
+                "orderId": "1234",
+                "userName": "Livingston",
+                "orderDate": "Jan 22, 2008",
+                "amount": "231",
+                "status": "paid",
+                "statusBadge": "badge-success",
+                "trackingNumber": "129304849"
+            },
+            {
+                "orderId": "7647",
+                "userName": "Luci",
+                "orderDate": "May 19, 2019",
+                "amount": "60",
+                "status": "shipped",
+                "statusBadge": "badge-primary",
+                "trackingNumber": ""
+            },
+            {
+                "orderId": "3547",
+                "userName": "Mathew",
+                "orderDate": "Feb 11, 2016",
+                "amount": "56",
+                "status": "unpaid",
+                "statusBadge": "badge-warning",
+                "trackingNumber": "345556676"
+            }
+        ];
+
+
+
+        var j = 0;
+        if(j==0){
+        generateHtml();
+        }
+        function generateHtml(){
+        document.getElementById('content').innerHTML = null;
+
+        var contentHtml = `<table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col"><a href="#" onClick="sortBy('orderId')">Invoice #</a></th>
+                                <th scope="col"><a href="#" onClick="sortBy('userName')">User</a></th>
+                                <th scope="col"><a href="#" onClick="sortBy('orderDate')">Order date</a></th>
+                                <th scope="col"><a href="#" onClick="sortBy('amount')">Amount</a></th>
+                            <th scope="col"><a href="#" onClick="sortBy('status')">Status</a></th>
+                            <th scope="col"><a href="#" onClick="sortBy('trackingNumber')">Tracking </a></th>
+                            </tr>
+                            </thead>
+                            <tbody>`;
+        for(var i=0; i<orders.length; i++){
+            contentHtml += `<tr>
+                                <th scope="row">order #${orders[i].orderId}</th>
+                                <td>${orders[i].userName}</td>
+                                <td>${orders[i].orderDate}</td>
+                                <td>$${orders[i].amount}</td>
+                            <td><span class="badge ${orders[i].statusBadge}">${orders[i].status}</span></td>
+                            <td>${orders[i].trackingNumber ? orders[i].trackingNumber : '-'}</td>
+                            </tr>`;
+        }
+            
+        contentHtml +=   `</tbody>
+                        </table>`;
+        document.getElementById('content').innerHTML = contentHtml;
+        j++;
+        }
+
+
+        function sortBy(columnTitle){
+            var newVal = function (a,b) {
+                return result = (a[columnTitle] < b[columnTitle]) ? -1 : (a[columnTitle] > b[columnTitle]) ? 1 : 0;
+            }
+            orders = orders.sort(newVal);
+        generateHtml();
+        }
+  </script>
+  </body>
+</html>
